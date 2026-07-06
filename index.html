@@ -295,39 +295,25 @@
             align-items: center;
             gap: 8px;
         }
+        /* ===== ЕДИНЫЙ РАЗМЕР ДЛЯ ВСЕХ ЛОГОТИПОВ ===== */
         .company img.company-logo {
-            height: 28px;
+            height: 36px;  /* задаём единую высоту */
             width: auto;
             vertical-align: middle;
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
             transition: filter 0.3s;
         }
-        .company img.company-logo.schneider-logo,
-        .company img.company-logo.x5-logo,
-        .company img.company-logo.rusagro-logo {
-            height: 44px;
-        }
-        .company img.company-logo.ozon-logo {
-            height: 28px;
-        }
         .company:hover img.company-logo {
             filter: grayscale(0) brightness(1);
         }
         .timeline-company img.timeline-logo {
-            height: 28px;
+            height: 36px;  /* единая высота для таймлайна */
             width: auto;
+            vertical-align: middle;
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
             transition: filter 0.3s;
-        }
-        .timeline-company img.timeline-logo.schneider-logo,
-        .timeline-company img.timeline-logo.x5-logo,
-        .timeline-company img.timeline-logo.rusagro-logo {
-            height: 44px;
-        }
-        .timeline-company img.timeline-logo.ozon-logo {
-            height: 28px;
         }
         .timeline-event:hover img.timeline-logo {
             filter: grayscale(0) brightness(1);
@@ -491,7 +477,7 @@
             justify-content: space-between;
             position: relative;
             margin: 25px 0 10px;
-            padding: 15px 0 15px; /* ← отвечает за общее пространство над и под линией */
+            padding: 15px 0 15px;
         }
         .timeline::before {
             content: '';
@@ -542,13 +528,13 @@
             gap: 8px;
             margin-top: 0;
             width: 100%;
-            margin-bottom: 2px; /* ← отвечает за расстояние от логотипа до линии (чем больше, тем выше логотип) */
+            margin-bottom: 12px; /* логотип над линией */
         }
         .timeline-position {
             font-weight: bold;
-            margin-top: 30px; /* ← отвечает за расстояние от линии до должности (чем больше, тем ниже должность) */
+            margin-top: 12px; /* должность под линией */
             width: 100%;
-            min-height: 3em; /* ← фиксирует высоту, чтобы все должности были на одном уровне */
+            min-height: 2.5em;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -861,16 +847,8 @@
             .skill-category.technical .tech-row { flex-wrap:wrap; }
             .skill-category.technical .tech-row .skill-item { flex: 0 0 100%; text-align:center; }
             .course-header .course-title-row { flex-wrap:wrap; }
-            .company img.company-logo { height: 24px; }
-            .company img.company-logo.schneider-logo,
-            .company img.company-logo.x5-logo,
-            .company img.company-logo.rusagro-logo { height: 32px; }
-            .company img.company-logo.ozon-logo { height: 24px; }
-            .timeline-company img.timeline-logo { height: 24px; }
-            .timeline-company img.timeline-logo.schneider-logo,
-            .timeline-company img.timeline-logo.x5-logo,
-            .timeline-company img.timeline-logo.rusagro-logo { height: 32px; }
-            .timeline-company img.timeline-logo.ozon-logo { height: 24px; }
+            .company img.company-logo { height: 28px; }
+            .timeline-company img.timeline-logo { height: 28px; }
             .timeline-position { margin-top: 8px; }
         }
     </style>
@@ -1012,25 +990,25 @@
             <div class="timeline">
                 <div class="timeline-event" data-target="ozon-job">
                     <div class="timeline-company">
-                        <img src="LogoOzon.png" alt="OZON" class="timeline-logo ozon-logo">
+                        <img src="LogoOzon.png" alt="OZON" class="timeline-logo">
                     </div>
                     <div class="timeline-position">Младший специалист в отделе товародвижения</div>
                 </div>
                 <div class="timeline-event" data-target="schneider-job">
                     <div class="timeline-company">
-                        <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="timeline-logo schneider-logo">
+                        <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="timeline-logo">
                     </div>
                     <div class="timeline-position">Инженер по логистическим процессам</div>
                 </div>
                 <div class="timeline-event" data-target="x5-job">
                     <div class="timeline-company">
-                        <img src="LogoX5.png" alt="X5 Group" class="timeline-logo x5-logo">
+                        <img src="LogoX5.png" alt="X5 Group" class="timeline-logo">
                     </div>
                     <div class="timeline-position">Менеджер направления оптимизации логистических процессов</div>
                 </div>
                 <div class="timeline-event" data-target="rusagro-job">
                     <div class="timeline-company">
-                        <img src="LogoRusagro.png" alt="РУСАГРО" class="timeline-logo rusagro-logo">
+                        <img src="LogoRusagro.png" alt="РУСАГРО" class="timeline-logo">
                     </div>
                     <div class="timeline-position">Ведущий менеджер направления оптимизации логистических цепочек</div>
                 </div>
@@ -1049,7 +1027,7 @@
             <div class="job" data-tags="rusagro" id="rusagro-job">
                 <div class="logistics-badge"><i class="fas fa-tractor"></i> Агрологистика</div>
                 <div class="company">
-                    <img src="LogoRusagro.png" alt="РУСАГРО" class="company-logo rusagro-logo"> Октябрь 2024 – Июль 2025
+                    <img src="LogoRusagro.png" alt="РУСАГРО" class="company-logo"> Октябрь 2024 – Июль 2025
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 10 месяцев | Продукты питания, сельское хозяйство</div>
                 <h3>Ведущий менеджер направления оптимизации логистических цепочек</h3>
@@ -1064,7 +1042,7 @@
             <div class="job" data-tags="x5" id="x5-job">
                 <div class="logistics-badge"><i class="fas fa-shopping-cart"></i> Розничная логистика</div>
                 <div class="company">
-                    <img src="LogoX5.png" alt="X5 Group" class="company-logo x5-logo"> Июнь 2023 – Октябрь 2024
+                    <img src="LogoX5.png" alt="X5 Group" class="company-logo"> Июнь 2023 – Октябрь 2024
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 1 год 5 месяцев | Розничная торговля, IT</div>
                 <h3>Менеджер направления оптимизации логистических процессов</h3>
@@ -1079,7 +1057,7 @@
             <div class="job" data-tags="schneider" id="schneider-job">
                 <div class="logistics-badge"><i class="fas fa-warehouse"></i> Складская логистика</div>
                 <div class="company">
-                    <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="company-logo schneider-logo"> Октябрь 2021 – Декабрь 2022
+                    <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="company-logo"> Октябрь 2021 – Декабрь 2022
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 1 год 3 месяца | Промышленное оборудование</div>
                 <h3>Инженер по логистическим процессам</h3>
@@ -1094,7 +1072,7 @@
             <div class="job" data-tags="ozon" id="ozon-job">
                 <div class="logistics-badge"><i class="fas fa-shipping-fast"></i> E-commerce логистика</div>
                 <div class="company">
-                    <img src="LogoOzon.png" alt="OZON" class="company-logo ozon-logo"> Декабрь 2020 – Октябрь 2021
+                    <img src="LogoOzon.png" alt="OZON" class="company-logo"> Декабрь 2020 – Октябрь 2021
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 10 месяцев | E-commerce, Логистика</div>
                 <h3>Младший специалист в отделе товародвижения</h3>
