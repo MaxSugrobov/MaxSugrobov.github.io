@@ -126,7 +126,7 @@
             justify-content:space-between;
             position:relative;
             margin:20px 0 5px;
-            padding: 40px 0 50px; /* увеличил нижний отступ для должностей */
+            padding: 40px 0 50px;
         }
         .timeline::before {
             content:'';
@@ -147,7 +147,11 @@
             display:flex;
             flex-direction:column;
             align-items:center;
-            transition: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* вернули плавность */
+        }
+        .timeline-event:hover {
+            transform: translateY(-6px); /* лёгкий подъём при наведении */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
         .timeline-event::before {
             content:'';
@@ -177,7 +181,7 @@
         }
         .timeline-position {
             font-weight:bold;
-            margin-top: 40px; /* сильно увеличил отступ сверху */
+            margin-top: 40px; /* отодвинули сильно вниз */
             width:100%;
             order: 1;
         }
@@ -258,7 +262,7 @@
             .timeline-logo { height:32px; }
             .timeline-logo.ozon-logo { height:28px; }
         }
-        /* Стили для карты */
+        /* Стили для карты - адаптивный баллун с вертикальным списком */
         .ymaps-2-1-79-balloon {
             max-width: 300px !important;
             padding: 8px 12px !important;
@@ -925,26 +929,25 @@
             showPhoto(0);
             startPhotoInterval();
 
-            // ========== КАРТА с кластеризацией без ограничений ==========
+            // ========== КАРТА ==========
             if (document.getElementById('projectsMap')) {
                 ymaps.ready(initMap);
 
                 function initMap() {
-                    const map = new ymaps.Map('projectsMap', {
+                    var map = new ymaps.Map('projectsMap', {
                         center: [55.76, 37.64],
                         zoom: 4,
                         controls: ['zoomControl', 'typeSelector', 'fullscreenControl']
                     });
 
-                    const logoMap = {
+                    var logoMap = {
                         "РУСАГРО": "LogoRusagro.png",
                         "X5": "LogoX5.png",
                         "Schneider": "LogoShneiderElectric.png",
                         "Ozon": "LogoOzon.png"
                     };
 
-                    const projectsByCity = {
-                        // ... (все города как раньше, я сокращаю для краткости, но в финальном коде они будут)
+                    var projectsByCity = {
                         "Москва": ["РУСАГРО", "X5", "Schneider", "Ozon"],
                         "Санкт-Петербург": ["РУСАГРО", "X5", "Ozon"],
                         "Саратов": ["РУСАГРО", "X5"],
@@ -1020,14 +1023,14 @@
                         "Кузнецк": ["X5"]
                     };
 
-                    const companyColors = {
+                    var companyColors = {
                         "РУСАГРО": 'islands#orangeIcon',
                         "X5": 'islands#greenIcon',
                         "Schneider": 'islands#darkGreenIcon',
                         "Ozon": 'islands#pinkIcon'
                     };
 
-                    const cityCoordinates = {
+                    var cityCoordinates = {
                         "Москва": [55.7558, 37.6173],
                         "Санкт-Петербург": [59.9343, 30.3351],
                         "Саратов": [51.5331, 46.0342],
@@ -1103,68 +1106,52 @@
                         "Кузнецк": [53.1167, 46.6000]
                     };
 
-                    // Кластеризатор с увеличенным лимитом объектов в баллуне
-                    const clusterer = new ymaps.Clusterer({
+                    // Создаём кластеризатор с кастомным макетом для вертикального списка
+                    var clusterer = new ymaps.Clusterer({
                         preset: 'islands#invertedVioletClusterIcons',
                         clusterDisableClickZoom: true,
                         clusterOpenBalloonOnClick: true,
-                        // Убираем карусель, используем обычный список
-                        clusterBalloonContentLayout: 'cluster#balloonContent',
-                        // Увеличиваем максимальное количество объектов в баллуне
                         clusterBalloonContentLayout: ymaps.templateLayoutFactory.createClass(
                             '<div class="balloon-content">' +
                                 '<div class="balloon-city">{{ properties.geoObjects.0.properties.hintContent }}</div>' +
                                 '{% for geoObject in properties.geoObjects %}' +
-                                    '<div class="balloon-company">' +
-                                        '{{ geoObject.properties.balloonContent }}' +
-                                    '</div>' +
+                                    '<div class="balloon-company">{{ geoObject.properties.balloonContent }}</div>' +
                                 '{% endfor %}' +
-                            '</div>',
-                            // Переопределяем метод для получения данных
-                            build: function() {
-                                this.constructor.superclass.build.call(this);
-                                var container = this.getElement();
-                                var items = this.getData().properties.geoObjects;
-                                if (items && items.length) {
-                                    // Убираем лишние заголовки, если есть
-                                }
-                            }
+                            '</div>'
                         ),
-                        // Убираем ограничение на количество показываемых объектов
-                        clusterBalloonMaxObjects: 1000
+                        clusterBalloonMaxObjects: 1000 // Показываем все объекты
                     });
 
+                    // Добавляем метки в кластеризатор
                     Object.entries(projectsByCity).forEach(([city, companies]) => {
-                        const coords = cityCoordinates[city];
+                        var coords = cityCoordinates[city];
                         if (coords) {
-                            // Формируем HTML для каждой компании (только логотип)
-                            let companiesHtml = companies.map(comp => {
-                                const logoFile = logoMap[comp] || '';
+                            // Формируем HTML с логотипами для каждой компании (без текста)
+                            var companiesHtml = companies.map(function(comp) {
+                                var logoFile = logoMap[comp] || '';
                                 if (!logoFile) return '';
-                                let logoClass = 'map-logo';
+                                var logoClass = 'map-logo';
                                 if (comp === 'Ozon') logoClass += ' ozon-map-logo';
-                                return `<img src="${logoFile}" class="${logoClass}" alt="${comp}">`;
+                                return '<img src="' + logoFile + '" class="' + logoClass + '" alt="' + comp + '">';
                             }).join('');
 
-                            // Содержимое баллуна для отдельной метки (если не кластер)
-                            const balloonContent = `
-                                <div class="balloon-city">${city}</div>
-                                <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;">${companiesHtml}</div>
-                            `;
-                            const firstCompany = companies[0];
-                            const placemark = new ymaps.Placemark(
+                            var balloonContent = companiesHtml; // только логотипы
+
+                            var firstCompany = companies[0];
+                            var placemark = new ymaps.Placemark(
                                 coords,
-                                { 
-                                    hintContent: city, 
-                                    balloonContent: balloonContent,
-                                    // Для кластера сохраняем список компаний в отдельном свойстве
-                                    companies: companies
+                                {
+                                    hintContent: city,
+                                    balloonContent: balloonContent // для одиночной метки
                                 },
-                                { preset: companyColors[firstCompany] }
+                                {
+                                    preset: companyColors[firstCompany]
+                                }
                             );
                             clusterer.add(placemark);
                         }
                     });
+
                     map.geoObjects.add(clusterer);
                     map.setBounds(clusterer.getBounds(), { checkZoomRange: true, zoomMargin: 50 });
                 }
@@ -1172,8 +1159,8 @@
 
             // Скачивание PDF
             document.getElementById('downloadPdf').addEventListener('click', function() {
-                const element = document.querySelector('.container');
-                const opt = {
+                var element = document.querySelector('.container');
+                var opt = {
                     margin: 10,
                     filename: 'Сугробов_Максим_резюме.pdf',
                     image: { type: 'jpeg', quality: 0.98 },
@@ -1183,22 +1170,24 @@
                 html2pdf().set(opt).from(element).save();
             });
 
-            // Таймлайн (без эффекта всплытия)
-            document.querySelectorAll('.timeline-event').forEach(event => {
+            // Таймлайн – клик с подсветкой
+            document.querySelectorAll('.timeline-event').forEach(function(event) {
                 event.addEventListener('click', function() {
-                    const targetId = this.dataset.target;
-                    const targetEl = document.getElementById(targetId);
+                    var targetId = this.dataset.target;
+                    var targetEl = document.getElementById(targetId);
                     if (targetEl) {
                         targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         targetEl.classList.add('highlighted');
-                        setTimeout(() => targetEl.classList.remove('highlighted'), 3000);
+                        setTimeout(function() {
+                            targetEl.classList.remove('highlighted');
+                        }, 3000);
                     }
                 });
             });
 
             // Примеры работ
-            const toggleExamples = document.getElementById('toggleExamples');
-            const examplesContainer = document.getElementById('examplesContainer');
+            var toggleExamples = document.getElementById('toggleExamples');
+            var examplesContainer = document.getElementById('examplesContainer');
             toggleExamples.addEventListener('click', function() {
                 if (examplesContainer.style.display === 'none') {
                     examplesContainer.style.display = 'block';
@@ -1210,14 +1199,14 @@
             });
 
             // Сертификаты
-            document.querySelectorAll('.course-header').forEach(header => {
+            document.querySelectorAll('.course-header').forEach(function(header) {
                 header.addEventListener('click', function(e) {
                     if (e.target.closest('.course-toggle')) return;
-                    const targetId = this.dataset.target;
-                    const container = document.getElementById(targetId);
+                    var targetId = this.dataset.target;
+                    var container = document.getElementById(targetId);
                     if (container) {
                         container.classList.toggle('active');
-                        const toggleBtn = this.querySelector('.course-toggle i');
+                        var toggleBtn = this.querySelector('.course-toggle i');
                         if (toggleBtn) {
                             toggleBtn.classList.toggle('fa-chevron-down');
                             toggleBtn.classList.toggle('fa-chevron-up');
@@ -1225,16 +1214,16 @@
                     }
                 });
             });
-            document.querySelectorAll('.course-toggle').forEach(btn => {
+            document.querySelectorAll('.course-toggle').forEach(function(btn) {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const header = this.closest('.course-header');
+                    var header = this.closest('.course-header');
                     if (header) {
-                        const targetId = header.dataset.target;
-                        const container = document.getElementById(targetId);
+                        var targetId = header.dataset.target;
+                        var container = document.getElementById(targetId);
                         if (container) {
                             container.classList.toggle('active');
-                            const icon = this.querySelector('i');
+                            var icon = this.querySelector('i');
                             icon.classList.toggle('fa-chevron-down');
                             icon.classList.toggle('fa-chevron-up');
                         }
@@ -1243,9 +1232,9 @@
             });
 
             // Клик по блокам образования
-            document.querySelectorAll('.education').forEach(el => {
+            document.querySelectorAll('.education').forEach(function(el) {
                 el.addEventListener('click', function(e) {
-                    const url = this.dataset.url;
+                    var url = this.dataset.url;
                     if (url) {
                         window.open(url, '_blank');
                     }
@@ -1264,7 +1253,7 @@
                 trigger: 'mouseenter focus',
             });
 
-            const style = document.createElement('style');
+            var style = document.createElement('style');
             style.textContent = `
                 .tippy-box[data-theme~='custom'] {
                     background-color: var(--tooltip-bg);
