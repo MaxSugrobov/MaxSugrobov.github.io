@@ -491,7 +491,7 @@
             justify-content: space-between;
             position: relative;
             margin: 25px 0 10px;
-            padding: 20px 0 30px;
+            padding: 15px 0 15px; /* ← отвечает за общее пространство над и под линией */
         }
         .timeline::before {
             content: '';
@@ -542,13 +542,13 @@
             gap: 8px;
             margin-top: 0;
             width: 100%;
-            margin-bottom: 30px; /* поднимаем логотипы выше линии */
+            margin-bottom: 12px; /* ← отвечает за расстояние от логотипа до линии (чем больше, тем выше логотип) */
         }
         .timeline-position {
             font-weight: bold;
-            margin-top: 45px; /* опускаем должности ниже линии */
+            margin-top: 12px; /* ← отвечает за расстояние от линии до должности (чем больше, тем ниже должность) */
             width: 100%;
-            min-height: 3em;
+            min-height: 2.5em; /* ← фиксирует высоту, чтобы все должности были на одном уровне */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -871,8 +871,7 @@
             .timeline-company img.timeline-logo.x5-logo,
             .timeline-company img.timeline-logo.rusagro-logo { height: 32px; }
             .timeline-company img.timeline-logo.ozon-logo { height: 24px; }
-            .timeline-company { margin-bottom: 15px; }
-            .timeline-position { margin-top: 25px; }
+            .timeline-position { margin-top: 8px; }
         }
     </style>
 </head>
@@ -1063,7 +1062,7 @@
                 </ul>
             </div>
             <div class="job" data-tags="x5" id="x5-job">
-                <div class="logistics-badge"><i class="fas fa-shopping-cart"></i> Розничная логистика</div> <!-- изменено -->
+                <div class="logistics-badge"><i class="fas fa-shopping-cart"></i> Розничная логистика</div>
                 <div class="company">
                     <img src="LogoX5.png" alt="X5 Group" class="company-logo x5-logo"> Июнь 2023 – Октябрь 2024
                 </div>
@@ -1111,7 +1110,6 @@
 
         <section>
             <h2><i class="fas fa-book-open"></i> Образование</h2>
-            <!-- Блок с ВАК -->
             <div class="education" data-url="https://vak.gisnauka.ru/">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                     <h3>Присуждение ученой степени Кандидат экономических наук (2026)</h3>
@@ -1123,7 +1121,6 @@
                     инфраструктуры портовых комплексов Северного морского пути
                 </div>
             </div>
-            <!-- Блоки с РУТ -->
             <div class="education" data-url="https://miit.ru/">
                 <h3>Аспирантура (2025)</h3>
                 <div class="company"><i class="fas fa-university"></i> Российский университет транспорта, Москва</div>
