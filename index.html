@@ -284,7 +284,7 @@
             transform: translateX(5px);
         }
         .education {
-            cursor: pointer; /* добавляем указатель, чтобы было видно, что кликабельно */
+            cursor: pointer;
         }
         .company {
             font-weight: bold;
@@ -521,7 +521,7 @@
         }
         .timeline-position {
             font-weight:bold;
-            margin-top: 30px; /* увеличен отступ, чтобы должности были ниже линии */
+            margin-top: 30px; /* опущено ниже линии */
             width:100%;
             min-height: 3em; /* выравнивание высоты */
             display: flex;
@@ -976,25 +976,25 @@
             <div class="timeline">
                 <div class="timeline-event" data-target="ozon-job">
                     <div class="timeline-company">
-                        <img src="LogoOzon.png" alt="OZON" class="timeline-logo"> OZON.ru
+                        <img src="LogoOzon.png" alt="OZON" class="timeline-logo">
                     </div>
                     <div class="timeline-position">Младший специалист в отделе товародвижения</div>
                 </div>
                 <div class="timeline-event" data-target="schneider-job">
                     <div class="timeline-company">
-                        <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="timeline-logo"> Schneider Electric
+                        <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="timeline-logo">
                     </div>
                     <div class="timeline-position">Инженер по логистическим процессам</div>
                 </div>
                 <div class="timeline-event" data-target="x5-job">
                     <div class="timeline-company">
-                        <img src="LogoX5.png" alt="X5 Group" class="timeline-logo"> X5 Group
+                        <img src="LogoX5.png" alt="X5 Group" class="timeline-logo">
                     </div>
                     <div class="timeline-position">Менеджер направления оптимизации логистических процессов</div>
                 </div>
                 <div class="timeline-event" data-target="rusagro-job">
                     <div class="timeline-company">
-                        <img src="LogoRusagro.png" alt="РУСАГРО" class="timeline-logo"> РУСАГРО
+                        <img src="LogoRusagro.png" alt="РУСАГРО" class="timeline-logo">
                     </div>
                     <div class="timeline-position">Ведущий менеджер направления оптимизации логистических цепочек</div>
                 </div>
@@ -1013,7 +1013,7 @@
             <div class="job" data-tags="rusagro" id="rusagro-job">
                 <div class="logistics-badge"><i class="fas fa-tractor"></i> Агрологистика</div>
                 <div class="company">
-                    <img src="LogoRusagro.png" alt="РУСАГРО" class="company-logo"> Группа Компаний РУСАГРО (Октябрь 2024 - Июль 2025)
+                    <img src="LogoRusagro.png" alt="РУСАГРО" class="company-logo"> Октябрь 2024 – Июль 2025
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 10 месяцев | Продукты питания, сельское хозяйство</div>
                 <h3>Ведущий менеджер направления оптимизации логистических цепочек</h3>
@@ -1028,7 +1028,7 @@
             <div class="job" data-tags="x5" id="x5-job">
                 <div class="logistics-badge"><i class="fas fa-robot"></i> Розничная логистика</div>
                 <div class="company">
-                    <img src="LogoX5.png" alt="X5 Group" class="company-logo"> X5 Group (Июнь 2023 - Октябрь 2024)
+                    <img src="LogoX5.png" alt="X5 Group" class="company-logo"> Июнь 2023 – Октябрь 2024
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 1 год 5 месяцев | Розничная торговля, IT</div>
                 <h3>Менеджер направления оптимизации логистических процессов</h3>
@@ -1043,7 +1043,7 @@
             <div class="job" data-tags="schneider" id="schneider-job">
                 <div class="logistics-badge"><i class="fas fa-warehouse"></i> Складская логистика</div>
                 <div class="company">
-                    <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="company-logo"> Schneider Electric (Октябрь 2021 - Декабрь 2022)
+                    <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="company-logo"> Октябрь 2021 – Декабрь 2022
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 1 год 3 месяца | Промышленное оборудование</div>
                 <h3>Инженер по логистическим процессам</h3>
@@ -1058,7 +1058,7 @@
             <div class="job" data-tags="ozon" id="ozon-job">
                 <div class="logistics-badge"><i class="fas fa-shipping-fast"></i> E-commerce логистика</div>
                 <div class="company">
-                    <img src="LogoOzon.png" alt="OZON" class="company-logo"> OZON.ru (Декабрь 2020 - Октябрь 2021)
+                    <img src="LogoOzon.png" alt="OZON" class="company-logo"> Декабрь 2020 – Октябрь 2021
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 10 месяцев | E-commerce, Логистика</div>
                 <h3>Младший специалист в отделе товародвижения</h3>
@@ -1454,7 +1454,7 @@
             showPhoto(0);
             startPhotoInterval();
 
-            // Карта (рабочая версия, как в файле "Версия до лого.txt")
+            // ===== КАРТА (рабочая версия, как в резервной копии) =====
             if (document.getElementById('projectsMap')) {
                 ymaps.ready(initMap);
 
