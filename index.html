@@ -284,7 +284,7 @@
             transform: translateX(5px);
         }
         .education {
-            cursor: pointer; /* добавляем указатель, чтобы было видно, что кликабельно */
+            cursor: pointer;
         }
         .company {
             font-weight: bold;
@@ -293,6 +293,33 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+        .company .company-logo {
+            height: 28px;
+            width: auto;
+            vertical-align: middle;
+            object-fit: contain;
+            transition: filter 0.3s;
+            filter: grayscale(0.2) brightness(0.95);
+        }
+        .company:hover .company-logo {
+            filter: grayscale(0) brightness(1);
+        }
+        .timeline-logo {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(0.2) brightness(0.95);
+            transition: filter 0.3s;
+        }
+        .timeline-event:hover .timeline-logo {
+            filter: grayscale(0) brightness(1);
+        }
+        .map-logo {
+            height: 16px;
+            width: auto;
+            vertical-align: middle;
+            margin-right: 4px;
         }
         .period {
             color: #7f8c8d;
@@ -806,11 +833,13 @@
             .skill-category.technical .tech-row { flex-wrap:wrap; }
             .skill-category.technical .tech-row .skill-item { flex: 0 0 100%; text-align:center; }
             .course-header .course-title-row { flex-wrap:wrap; }
+            .company .company-logo { height: 22px; }
+            .timeline-logo { height: 22px; }
         }
     </style>
 </head>
 <body>
-    <!-- БОКОВЫЕ ИКОНКИ (полный набор) -->
+    <!-- БОКОВЫЕ ИКОНКИ (все, как в оригинале) -->
     <div class="logistics-icon icon-left" style="top:1%;left:3%;font-size:60px;--rot:-12deg;">🚛</div>
     <div class="logistics-icon icon-left dark" style="top:4%;left:12%;font-size:75px;--rot:25deg;">✈️</div>
     <div class="logistics-icon icon-left" style="top:7%;left:6%;font-size:50px;--rot:-8deg;">🚢</div>
@@ -945,19 +974,27 @@
             <h2><i class="fas fa-history"></i> Хронология карьеры</h2>
             <div class="timeline">
                 <div class="timeline-event" data-target="ozon-job">
-                    <div class="timeline-company"><i class="fas fa-boxes"></i> OZON.ru</div>
+                    <div class="timeline-company">
+                        <img src="LogoOzon.png" alt="OZON" class="timeline-logo"> OZON.ru
+                    </div>
                     <div class="timeline-position">Младший специалист в отделе товародвижения</div>
                 </div>
                 <div class="timeline-event" data-target="schneider-job">
-                    <div class="timeline-company"><i class="fas fa-industry"></i> Schneider Electric</div>
+                    <div class="timeline-company">
+                        <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="timeline-logo"> Schneider Electric
+                    </div>
                     <div class="timeline-position">Инженер по логистическим процессам</div>
                 </div>
                 <div class="timeline-event" data-target="x5-job">
-                    <div class="timeline-company"><i class="fas fa-shopping-cart"></i> X5 Group</div>
+                    <div class="timeline-company">
+                        <img src="LogoX5.png" alt="X5 Group" class="timeline-logo"> X5 Group
+                    </div>
                     <div class="timeline-position">Менеджер направления оптимизации логистических процессов</div>
                 </div>
                 <div class="timeline-event" data-target="rusagro-job">
-                    <div class="timeline-company"><i class="fas fa-tractor"></i> РУСАГРО</div>
+                    <div class="timeline-company">
+                        <img src="LogoRusagro.png" alt="РУСАГРО" class="timeline-logo"> РУСАГРО
+                    </div>
                     <div class="timeline-position">Ведущий менеджер направления оптимизации логистических цепочек</div>
                 </div>
             </div>
@@ -972,9 +1009,13 @@
                 <button class="filter-btn" data-filter="schneider">Schneider Electric</button>
                 <button class="filter-btn" data-filter="ozon">OZON</button>
             </div>
+
             <div class="job" data-tags="rusagro" id="rusagro-job">
                 <div class="logistics-badge"><i class="fas fa-tractor"></i> Агрологистика</div>
-                <div class="company"><i class="fas fa-tractor"></i> Группа Компаний РУСАГРО (Октябрь 2024 - Июль 2025)</div>
+                <div class="company">
+                    <img src="LogoRusagro.png" alt="РУСАГРО" class="company-logo">
+                    Группа Компаний РУСАГРО (Октябрь 2024 - Июль 2025)
+                </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 10 месяцев | Продукты питания, сельское хозяйство</div>
                 <h3>Ведущий менеджер направления оптимизации логистических цепочек</h3>
                 <ul>
@@ -985,9 +1026,13 @@
                     <li>Стандартизировал 55+ ВНД-процессов, создал цифровой навигатор документов</li>
                 </ul>
             </div>
+
             <div class="job" data-tags="x5" id="x5-job">
                 <div class="logistics-badge"><i class="fas fa-robot"></i> Розничная логистика</div>
-                <div class="company"><i class="fas fa-shopping-cart"></i> X5 Group (Июнь 2023 - Октябрь 2024)</div>
+                <div class="company">
+                    <img src="LogoX5.png" alt="X5 Group" class="company-logo">
+                    X5 Group (Июнь 2023 - Октябрь 2024)
+                </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 1 год 5 месяцев | Розничная торговля, IT</div>
                 <h3>Менеджер направления оптимизации логистических процессов</h3>
                 <ul>
@@ -998,9 +1043,13 @@
                     <li>Стандартизировал 30+ бизнес-процессов</li>
                 </ul>
             </div>
+
             <div class="job" data-tags="schneider" id="schneider-job">
                 <div class="logistics-badge"><i class="fas fa-warehouse"></i> Складская логистика</div>
-                <div class="company"><i class="fas fa-industry"></i> Schneider Electric (Октябрь 2021 - Декабрь 2022)</div>
+                <div class="company">
+                    <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="company-logo">
+                    Schneider Electric (Октябрь 2021 - Декабрь 2022)
+                </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 1 год 3 месяца | Промышленное оборудование</div>
                 <h3>Инженер по логистическим процессам</h3>
                 <ul>
@@ -1011,9 +1060,13 @@
                     <li>Участвовал во внедрении CRM/ERP систем</li>
                 </ul>
             </div>
+
             <div class="job" data-tags="ozon" id="ozon-job">
                 <div class="logistics-badge"><i class="fas fa-shipping-fast"></i> E-commerce логистика</div>
-                <div class="company"><i class="fas fa-boxes"></i> OZON.ru (Декабрь 2020 - Октябрь 2021)</div>
+                <div class="company">
+                    <img src="LogoOzon.png" alt="OZON" class="company-logo">
+                    OZON.ru (Декабрь 2020 - Октябрь 2021)
+                </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 10 месяцев | E-commerce, Логистика</div>
                 <h3>Младший специалист в отделе товародвижения</h3>
                 <ul>
@@ -1028,7 +1081,6 @@
 
         <section>
             <h2><i class="fas fa-book-open"></i> Образование</h2>
-            <!-- Блок с ВАК -->
             <div class="education" data-url="https://vak.gisnauka.ru/">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                     <h3>Присуждение ученой степени Кандидат экономических наук (2026)</h3>
@@ -1040,7 +1092,6 @@
                     инфраструктуры портовых комплексов Северного морского пути
                 </div>
             </div>
-            <!-- Блоки с РУТ -->
             <div class="education" data-url="https://miit.ru/">
                 <h3>Аспирантура (2025)</h3>
                 <div class="company"><i class="fas fa-university"></i> Российский университет транспорта, Москва</div>
@@ -1098,7 +1149,7 @@
                     <h3><i class="fas fa-chart-line"></i> Экспертиза в видах логистики</h3>
                     <div class="expertise-container">
                         <div class="expertise-category">
-                            <h4 style="margin-top:0;"><i class="fas fa-tools"></i> Практика</h4>
+                            <h4 style="margin-top:0;"><i class="fas fa-tools"></i> Практическая</h4>
                             <div class="skill-bar-container">
                                 <div class="skill-bar-label"><span>Автомобильные перевозки</span><span>85%</span></div>
                                 <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
@@ -1113,7 +1164,7 @@
                             </div>
                         </div>
                         <div class="expertise-category">
-                            <h4 style="margin-top:0;"><i class="fas fa-graduation-cap"></i> Теория</h4>
+                            <h4 style="margin-top:0;"><i class="fas fa-graduation-cap"></i> Академическая</h4>
                             <div class="skill-bar-container">
                                 <div class="skill-bar-label"><span>Морские перевозки</span><span>90%</span></div>
                                 <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
@@ -1374,7 +1425,7 @@
             setInterval(() => {
                 currentIndex = (currentIndex + 1) % testimonials.length;
                 showTestimonial(currentIndex);
-            }, 5000);
+            }, 8000);
 
             // Карусель фото
             const photos = document.querySelectorAll('.photo-item');
@@ -1408,7 +1459,7 @@
             showPhoto(0);
             startPhotoInterval();
 
-            // Карта
+            // Карта (с логотипами)
             if (document.getElementById('projectsMap')) {
                 ymaps.ready(initMap);
 
@@ -1418,6 +1469,14 @@
                         zoom: 4,
                         controls: ['zoomControl', 'typeSelector', 'fullscreenControl']
                     });
+
+                    // Сопоставление названий компаний с файлами логотипов
+                    const logoMap = {
+                        "РУСАГРО": "LogoRusagro.png",
+                        "X5": "LogoX5.png",
+                        "Schneider": "LogoShneiderElectric.png",
+                        "Ozon": "LogoOzon.png"
+                    };
 
                     const projectsByCity = {
                         "Москва": ["РУСАГРО", "X5", "Schneider", "Ozon"],
@@ -1584,13 +1643,20 @@
                         clusterOpenBalloonOnClick: true,
                         clusterBalloonContentLayout: 'cluster#balloonCarousel'
                     });
+
                     Object.entries(projectsByCity).forEach(([city, companies]) => {
                         const coords = cityCoordinates[city];
                         if (coords) {
+                            let companiesHtml = companies.map(comp => {
+                                const logoFile = logoMap[comp] || '';
+                                const imgHtml = logoFile ? `<img src="${logoFile}" class="map-logo" alt="${comp}">` : '';
+                                return `${imgHtml} ${comp}`;
+                            }).join(', ');
+
                             const balloonContent = `
                                 <div style="padding:10px;">
                                     <h3 style="margin-top:0;">${city}</h3>
-                                    <p><strong>Компании:</strong> ${companies.join(', ')}</p>
+                                    <p><strong>Компании:</strong> ${companiesHtml}</p>
                                 </div>
                             `;
                             const firstCompany = companies[0];
@@ -1646,7 +1712,7 @@
                 }
             });
 
-            // Сертификаты – клик по .course-header (включая компанию)
+            // Сертификаты
             document.querySelectorAll('.course-header').forEach(header => {
                 header.addEventListener('click', function(e) {
                     if (e.target.closest('.course-toggle')) return;
@@ -1679,10 +1745,9 @@
                 });
             });
 
-            // Клик по блоку образования – переход по ссылке из data-url
+            // Клик по блокам образования
             document.querySelectorAll('.education').forEach(el => {
                 el.addEventListener('click', function(e) {
-                    // Игнорируем клик по внутренним ссылкам, если они есть (но их нет)
                     const url = this.dataset.url;
                     if (url) {
                         window.open(url, '_blank');
