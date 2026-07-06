@@ -295,7 +295,7 @@
             gap: 8px;
         }
         .company .company-logo {
-            height: 32px;
+            height: 44px;
             width: auto;
             vertical-align: middle;
             object-fit: contain;
@@ -306,12 +306,12 @@
             filter: grayscale(0) brightness(1);
         }
         .timeline-logo {
-            height: 32px;
+            height: 44px;
             width: auto;
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
             transition: filter 0.3s;
-            margin-top: -6px;
+            margin-top: -14px; /* поднимаем выше */
         }
         .timeline-event:hover .timeline-logo {
             filter: grayscale(0) brightness(1);
@@ -834,23 +834,41 @@
             .skill-category.technical .tech-row { flex-wrap:wrap; }
             .skill-category.technical .tech-row .skill-item { flex: 0 0 100%; text-align:center; }
             .course-header .course-title-row { flex-wrap:wrap; }
-            .company .company-logo { height: 26px; }
-            .timeline-logo { height: 26px; margin-top: -4px; }
+            .company .company-logo { height: 32px; }
+            .timeline-logo { height: 32px; margin-top: -10px; }
         }
-        /* Уменьшаем размер баллуна на карте */
+        /* Уменьшаем размер баллуна на карте – делаем компактным */
         .ymaps-2-1-79-balloon {
             max-width: 200px !important;
-            padding: 8px 12px !important;
+            padding: 4px 8px !important;
         }
         .ymaps-2-1-79-balloon__content {
-            font-size: 13px;
+            font-size: 12px !important;
             padding: 0 !important;
+            line-height: 1.2 !important;
         }
         .ymaps-2-1-79-balloon__layout {
-            padding: 6px 10px !important;
+            padding: 4px 6px !important;
         }
         .ymaps-2-1-79-cluster-content {
-            font-size: 13px;
+            font-size: 12px !important;
+        }
+        .ymaps-2-1-79-balloon__close {
+            display: none !important; /* убираем крестик, чтобы не занимал место */
+        }
+        /* Стили для содержимого баллуна – логотипы в строку, перенос */
+        .balloon-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 6px;
+            align-items: center;
+            justify-content: center;
+            padding: 2px 0;
+        }
+        .balloon-content .map-logo {
+            height: 18px;
+            width: auto;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -1475,7 +1493,7 @@
             showPhoto(0);
             startPhotoInterval();
 
-            // Карта (с логотипами, без дублирования названий, уменьшен баллун)
+            // Карта (с логотипами, компактный баллун)
             if (document.getElementById('projectsMap')) {
                 ymaps.ready(initMap);
 
@@ -1486,7 +1504,6 @@
                         controls: ['zoomControl', 'typeSelector', 'fullscreenControl']
                     });
 
-                    // Сопоставление названий компаний с файлами логотипов
                     const logoMap = {
                         "РУСАГРО": "LogoRusagro.png",
                         "X5": "LogoX5.png",
@@ -1659,22 +1676,23 @@
                         clusterOpenBalloonOnClick: true,
                         clusterBalloonContentLayout: 'cluster#balloonCarousel',
                         clusterBalloonItemContentLayout: ymaps.templateLayoutFactory.createClass(
-                            '<div style="padding: 4px 8px; font-size: 13px; max-width: 200px;">$[properties.balloonContent]</div>'
+                            '<div class="balloon-content">$[properties.balloonContent]</div>'
                         )
                     });
 
                     Object.entries(projectsByCity).forEach(([city, companies]) => {
                         const coords = cityCoordinates[city];
                         if (coords) {
-                            let companiesHtml = companies.map(comp => {
+                            // Собираем логотипы в строку без текстовых названий
+                            let logosHtml = companies.map(comp => {
                                 const logoFile = logoMap[comp] || '';
                                 return logoFile ? `<img src="${logoFile}" class="map-logo" alt="${comp}">` : '';
-                            }).join(' ');
+                            }).join('');
 
                             const balloonContent = `
-                                <div style="padding: 6px 8px; line-height: 1.4;">
-                                    <strong style="font-size: 14px;">${city}</strong><br>
-                                    ${companiesHtml}
+                                <div style="display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; justify-content: center; padding: 2px 0;">
+                                    <strong style="font-size: 13px; width: 100%; text-align: center; margin-bottom: 2px;">${city}</strong>
+                                    ${logosHtml}
                                 </div>
                             `;
                             const firstCompany = companies[0];
