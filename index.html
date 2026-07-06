@@ -295,11 +295,11 @@
             align-items: center;
             gap: 8px;
         }
-        /* ===== ЛОГОТИПЫ: ФИКСИРОВАННАЯ ШИРИНА ДЛЯ ЕДИНОГО РАЗМЕРА ===== */
+        /* ===== НОВЫЕ НАСТРОЙКИ ЛОГОТИПОВ ===== */
         .company img.company-logo {
-            width: 44px;
-            height: auto;
-            max-height: 48px;
+            height: 40px;          /* единая высота */
+            width: auto;
+            max-height: none;
             vertical-align: middle;
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
@@ -309,9 +309,9 @@
             filter: grayscale(0) brightness(1);
         }
         .timeline-company img.timeline-logo {
-            width: 44px;
-            height: auto;
-            max-height: 48px;
+            height: 40px;          /* единая высота для таймлайна */
+            width: auto;
+            max-height: none;
             vertical-align: middle;
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
@@ -850,12 +850,10 @@
             .skill-category.technical .tech-row .skill-item { flex: 0 0 100%; text-align:center; }
             .course-header .course-title-row { flex-wrap:wrap; }
             .company img.company-logo {
-                width: 32px;
-                max-height: 36px;
+                height: 30px;
             }
             .timeline-company img.timeline-logo {
-                width: 32px;
-                max-height: 36px;
+                height: 30px;
             }
             .timeline-position { margin-top: 8px; }
         }
