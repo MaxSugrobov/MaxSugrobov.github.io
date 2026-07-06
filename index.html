@@ -295,10 +295,11 @@
             align-items: center;
             gap: 8px;
         }
-        /* ===== ЕДИНЫЙ РАЗМЕР ДЛЯ ВСЕХ ЛОГОТИПОВ ===== */
+        /* ===== ЛОГОТИПЫ: ФИКСИРОВАННАЯ ШИРИНА ДЛЯ ЕДИНОГО РАЗМЕРА ===== */
         .company img.company-logo {
-            height: 36px;  /* задаём единую высоту */
-            width: auto;
+            width: 44px;
+            height: auto;
+            max-height: 48px;
             vertical-align: middle;
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
@@ -308,8 +309,9 @@
             filter: grayscale(0) brightness(1);
         }
         .timeline-company img.timeline-logo {
-            height: 36px;  /* единая высота для таймлайна */
-            width: auto;
+            width: 44px;
+            height: auto;
+            max-height: 48px;
             vertical-align: middle;
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
@@ -528,11 +530,11 @@
             gap: 8px;
             margin-top: 0;
             width: 100%;
-            margin-bottom: 12px; /* логотип над линией */
+            margin-bottom: 12px;
         }
         .timeline-position {
             font-weight: bold;
-            margin-top: 12px; /* должность под линией */
+            margin-top: 12px;
             width: 100%;
             min-height: 2.5em;
             display: flex;
@@ -847,8 +849,14 @@
             .skill-category.technical .tech-row { flex-wrap:wrap; }
             .skill-category.technical .tech-row .skill-item { flex: 0 0 100%; text-align:center; }
             .course-header .course-title-row { flex-wrap:wrap; }
-            .company img.company-logo { height: 28px; }
-            .timeline-company img.timeline-logo { height: 28px; }
+            .company img.company-logo {
+                width: 32px;
+                max-height: 36px;
+            }
+            .timeline-company img.timeline-logo {
+                width: 32px;
+                max-height: 36px;
+            }
             .timeline-position { margin-top: 8px; }
         }
     </style>
