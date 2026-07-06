@@ -295,7 +295,7 @@
             gap: 8px;
         }
         .company .company-logo {
-            height: 28px;
+            height: 32px;
             width: auto;
             vertical-align: middle;
             object-fit: contain;
@@ -306,11 +306,12 @@
             filter: grayscale(0) brightness(1);
         }
         .timeline-logo {
-            height: 28px;
+            height: 32px;
             width: auto;
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
             transition: filter 0.3s;
+            margin-top: -6px;
         }
         .timeline-event:hover .timeline-logo {
             filter: grayscale(0) brightness(1);
@@ -833,8 +834,23 @@
             .skill-category.technical .tech-row { flex-wrap:wrap; }
             .skill-category.technical .tech-row .skill-item { flex: 0 0 100%; text-align:center; }
             .course-header .course-title-row { flex-wrap:wrap; }
-            .company .company-logo { height: 22px; }
-            .timeline-logo { height: 22px; }
+            .company .company-logo { height: 26px; }
+            .timeline-logo { height: 26px; margin-top: -4px; }
+        }
+        /* Уменьшаем размер баллуна на карте */
+        .ymaps-2-1-79-balloon {
+            max-width: 200px !important;
+            padding: 8px 12px !important;
+        }
+        .ymaps-2-1-79-balloon__content {
+            font-size: 13px;
+            padding: 0 !important;
+        }
+        .ymaps-2-1-79-balloon__layout {
+            padding: 6px 10px !important;
+        }
+        .ymaps-2-1-79-cluster-content {
+            font-size: 13px;
         }
     </style>
 </head>
@@ -1014,8 +1030,9 @@
                 <div class="logistics-badge"><i class="fas fa-tractor"></i> Агрологистика</div>
                 <div class="company">
                     <img src="LogoRusagro.png" alt="РУСАГРО" class="company-logo">
+                    Октябрь 2024 – Июль 2025
                 </div>
-                <div class="period"><i class="far fa-calendar-alt"></i> Октябрь 2024 - Июль 2025 · 10 месяцев · Продукты питания, сельское хозяйство</div>
+                <div class="period"><i class="far fa-calendar-alt"></i> 10 месяцев | Продукты питания, сельское хозяйство</div>
                 <h3>Ведущий менеджер направления оптимизации логистических цепочек</h3>
                 <ul>
                     <li>Сформировал кросс-функциональную команду из 9 специалистов</li>
@@ -1030,8 +1047,9 @@
                 <div class="logistics-badge"><i class="fas fa-robot"></i> Розничная логистика</div>
                 <div class="company">
                     <img src="LogoX5.png" alt="X5 Group" class="company-logo">
+                    Июнь 2023 – Октябрь 2024
                 </div>
-                <div class="period"><i class="far fa-calendar-alt"></i> Июнь 2023 - Октябрь 2024 · 1 год 5 месяцев · Розничная торговля, IT</div>
+                <div class="period"><i class="far fa-calendar-alt"></i> 1 год 5 месяцев | Розничная торговля, IT</div>
                 <h3>Менеджер направления оптимизации логистических процессов</h3>
                 <ul>
                     <li>Лидировал проект по ресурсному планированию на горизонтах до 18 месяцев</li>
@@ -1046,8 +1064,9 @@
                 <div class="logistics-badge"><i class="fas fa-warehouse"></i> Складская логистика</div>
                 <div class="company">
                     <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="company-logo">
+                    Октябрь 2021 – Декабрь 2022
                 </div>
-                <div class="period"><i class="far fa-calendar-alt"></i> Октябрь 2021 - Декабрь 2022 · 1 год 3 месяца · Промышленное оборудование</div>
+                <div class="period"><i class="far fa-calendar-alt"></i> 1 год 3 месяца | Промышленное оборудование</div>
                 <h3>Инженер по логистическим процессам</h3>
                 <ul>
                     <li>Лидировал проект сертификации склада по ISO 9001/14001</li>
@@ -1062,8 +1081,9 @@
                 <div class="logistics-badge"><i class="fas fa-shipping-fast"></i> E-commerce логистика</div>
                 <div class="company">
                     <img src="LogoOzon.png" alt="OZON" class="company-logo">
+                    Декабрь 2020 – Октябрь 2021
                 </div>
-                <div class="period"><i class="far fa-calendar-alt"></i> Декабрь 2020 - Октябрь 2021 · 10 месяцев · E-commerce, Логистика</div>
+                <div class="period"><i class="far fa-calendar-alt"></i> 10 месяцев | E-commerce, Логистика</div>
                 <h3>Младший специалист в отделе товародвижения</h3>
                 <ul>
                     <li>Оптимизировал методики расчета потребности продукции, сократив списание товаров на 85% (37.5 млн руб/год)</li>
@@ -1455,7 +1475,7 @@
             showPhoto(0);
             startPhotoInterval();
 
-            // Карта (с логотипами, без дублирования названий)
+            // Карта (с логотипами, без дублирования названий, уменьшен баллун)
             if (document.getElementById('projectsMap')) {
                 ymaps.ready(initMap);
 
@@ -1637,22 +1657,24 @@
                         preset: 'islands#invertedVioletClusterIcons',
                         clusterDisableClickZoom: true,
                         clusterOpenBalloonOnClick: true,
-                        clusterBalloonContentLayout: 'cluster#balloonCarousel'
+                        clusterBalloonContentLayout: 'cluster#balloonCarousel',
+                        clusterBalloonItemContentLayout: ymaps.templateLayoutFactory.createClass(
+                            '<div style="padding: 4px 8px; font-size: 13px; max-width: 200px;">$[properties.balloonContent]</div>'
+                        )
                     });
 
                     Object.entries(projectsByCity).forEach(([city, companies]) => {
                         const coords = cityCoordinates[city];
                         if (coords) {
-                            // Формируем строку только из логотипов, без текстовых названий
                             let companiesHtml = companies.map(comp => {
                                 const logoFile = logoMap[comp] || '';
                                 return logoFile ? `<img src="${logoFile}" class="map-logo" alt="${comp}">` : '';
                             }).join(' ');
 
                             const balloonContent = `
-                                <div style="padding:10px;">
-                                    <h3 style="margin-top:0;">${city}</h3>
-                                    <p><strong>Компании:</strong> ${companiesHtml}</p>
+                                <div style="padding: 6px 8px; line-height: 1.4;">
+                                    <strong style="font-size: 14px;">${city}</strong><br>
+                                    ${companiesHtml}
                                 </div>
                             `;
                             const firstCompany = companies[0];
