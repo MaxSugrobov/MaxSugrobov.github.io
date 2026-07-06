@@ -294,6 +294,7 @@
             align-items: center;
             gap: 8px;
         }
+        /* Логотипы в опыте работы */
         .company img.company-logo {
             height: 28px;
             width: auto;
@@ -302,9 +303,18 @@
             filter: grayscale(0.2) brightness(0.95);
             transition: filter 0.3s;
         }
+        .company img.company-logo.schneider-logo,
+        .company img.company-logo.x5-logo,
+        .company img.company-logo.rusagro-logo {
+            height: 44px; /* увеличены для этих компаний */
+        }
+        .company img.company-logo.ozon-logo {
+            height: 28px; /* оставлен без изменений */
+        }
         .company:hover img.company-logo {
             filter: grayscale(0) brightness(1);
         }
+        /* Логотипы в таймлайне */
         .timeline-company img.timeline-logo {
             height: 28px;
             width: auto;
@@ -313,8 +323,20 @@
             filter: grayscale(0.2) brightness(0.95);
             transition: filter 0.3s;
         }
+        .timeline-company img.timeline-logo.schneider-logo,
+        .timeline-company img.timeline-logo.x5-logo,
+        .timeline-company img.timeline-logo.rusagro-logo {
+            height: 44px; /* увеличены для этих компаний */
+        }
+        .timeline-company img.timeline-logo.ozon-logo {
+            height: 28px; /* оставлен без изменений */
+        }
         .timeline-event:hover img.timeline-logo {
             filter: grayscale(0) brightness(1);
+        }
+        /* Поднимаем логотипы в таймлайне вверх, чтобы они не касались линии */
+        .timeline-company {
+            transform: translateY(-8px);
         }
         .period {
             color: #7f8c8d;
@@ -518,6 +540,7 @@
             gap:8px;
             margin-top:10px;
             width:100%;
+            transform: translateY(-8px); /* поднимаем логотипы вверх */
         }
         .timeline-position {
             font-weight:bold;
@@ -834,8 +857,17 @@
             .skill-category.technical .tech-row .skill-item { flex: 0 0 100%; text-align:center; }
             .course-header .course-title-row { flex-wrap:wrap; }
             .company img.company-logo { height: 24px; }
+            .company img.company-logo.schneider-logo,
+            .company img.company-logo.x5-logo,
+            .company img.company-logo.rusagro-logo { height: 32px; }
+            .company img.company-logo.ozon-logo { height: 24px; }
             .timeline-company img.timeline-logo { height: 24px; }
+            .timeline-company img.timeline-logo.schneider-logo,
+            .timeline-company img.timeline-logo.x5-logo,
+            .timeline-company img.timeline-logo.rusagro-logo { height: 32px; }
+            .timeline-company img.timeline-logo.ozon-logo { height: 24px; }
             .timeline-position { min-height: 2.5em; margin-top: 20px; }
+            .timeline-company { transform: translateY(-4px); }
         }
     </style>
 </head>
@@ -976,25 +1008,25 @@
             <div class="timeline">
                 <div class="timeline-event" data-target="ozon-job">
                     <div class="timeline-company">
-                        <img src="LogoOzon.png" alt="OZON" class="timeline-logo">
+                        <img src="LogoOzon.png" alt="OZON" class="timeline-logo ozon-logo">
                     </div>
                     <div class="timeline-position">Младший специалист в отделе товародвижения</div>
                 </div>
                 <div class="timeline-event" data-target="schneider-job">
                     <div class="timeline-company">
-                        <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="timeline-logo">
+                        <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="timeline-logo schneider-logo">
                     </div>
                     <div class="timeline-position">Инженер по логистическим процессам</div>
                 </div>
                 <div class="timeline-event" data-target="x5-job">
                     <div class="timeline-company">
-                        <img src="LogoX5.png" alt="X5 Group" class="timeline-logo">
+                        <img src="LogoX5.png" alt="X5 Group" class="timeline-logo x5-logo">
                     </div>
                     <div class="timeline-position">Менеджер направления оптимизации логистических процессов</div>
                 </div>
                 <div class="timeline-event" data-target="rusagro-job">
                     <div class="timeline-company">
-                        <img src="LogoRusagro.png" alt="РУСАГРО" class="timeline-logo">
+                        <img src="LogoRusagro.png" alt="РУСАГРО" class="timeline-logo rusagro-logo">
                     </div>
                     <div class="timeline-position">Ведущий менеджер направления оптимизации логистических цепочек</div>
                 </div>
@@ -1013,7 +1045,7 @@
             <div class="job" data-tags="rusagro" id="rusagro-job">
                 <div class="logistics-badge"><i class="fas fa-tractor"></i> Агрологистика</div>
                 <div class="company">
-                    <img src="LogoRusagro.png" alt="РУСАГРО" class="company-logo"> Октябрь 2024 – Июль 2025
+                    <img src="LogoRusagro.png" alt="РУСАГРО" class="company-logo rusagro-logo"> Октябрь 2024 – Июль 2025
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 10 месяцев | Продукты питания, сельское хозяйство</div>
                 <h3>Ведущий менеджер направления оптимизации логистических цепочек</h3>
@@ -1028,7 +1060,7 @@
             <div class="job" data-tags="x5" id="x5-job">
                 <div class="logistics-badge"><i class="fas fa-robot"></i> Розничная логистика</div>
                 <div class="company">
-                    <img src="LogoX5.png" alt="X5 Group" class="company-logo"> Июнь 2023 – Октябрь 2024
+                    <img src="LogoX5.png" alt="X5 Group" class="company-logo x5-logo"> Июнь 2023 – Октябрь 2024
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 1 год 5 месяцев | Розничная торговля, IT</div>
                 <h3>Менеджер направления оптимизации логистических процессов</h3>
@@ -1043,7 +1075,7 @@
             <div class="job" data-tags="schneider" id="schneider-job">
                 <div class="logistics-badge"><i class="fas fa-warehouse"></i> Складская логистика</div>
                 <div class="company">
-                    <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="company-logo"> Октябрь 2021 – Декабрь 2022
+                    <img src="LogoShneiderElectric.png" alt="Schneider Electric" class="company-logo schneider-logo"> Октябрь 2021 – Декабрь 2022
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 1 год 3 месяца | Промышленное оборудование</div>
                 <h3>Инженер по логистическим процессам</h3>
@@ -1058,7 +1090,7 @@
             <div class="job" data-tags="ozon" id="ozon-job">
                 <div class="logistics-badge"><i class="fas fa-shipping-fast"></i> E-commerce логистика</div>
                 <div class="company">
-                    <img src="LogoOzon.png" alt="OZON" class="company-logo"> Декабрь 2020 – Октябрь 2021
+                    <img src="LogoOzon.png" alt="OZON" class="company-logo ozon-logo"> Декабрь 2020 – Октябрь 2021
                 </div>
                 <div class="period"><i class="far fa-calendar-alt"></i> 10 месяцев | E-commerce, Логистика</div>
                 <h3>Младший специалист в отделе товародвижения</h3>
