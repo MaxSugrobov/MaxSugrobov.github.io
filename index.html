@@ -11,6 +11,7 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
     <style>
+        /* ===== ОСНОВНЫЕ СТИЛИ ===== */
         :root {
             --primary: #2c3e50;
             --secondary: #3498db;
@@ -294,7 +295,6 @@
             align-items: center;
             gap: 8px;
         }
-        /* Логотипы в опыте работы */
         .company img.company-logo {
             height: 28px;
             width: auto;
@@ -306,19 +306,17 @@
         .company img.company-logo.schneider-logo,
         .company img.company-logo.x5-logo,
         .company img.company-logo.rusagro-logo {
-            height: 44px; /* увеличены для этих компаний */
+            height: 44px;
         }
         .company img.company-logo.ozon-logo {
-            height: 28px; /* оставлен без изменений */
+            height: 28px;
         }
         .company:hover img.company-logo {
             filter: grayscale(0) brightness(1);
         }
-        /* Логотипы в таймлайне */
         .timeline-company img.timeline-logo {
             height: 28px;
             width: auto;
-            vertical-align: middle;
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
             transition: filter 0.3s;
@@ -326,17 +324,13 @@
         .timeline-company img.timeline-logo.schneider-logo,
         .timeline-company img.timeline-logo.x5-logo,
         .timeline-company img.timeline-logo.rusagro-logo {
-            height: 44px; /* увеличены для этих компаний */
+            height: 44px;
         }
         .timeline-company img.timeline-logo.ozon-logo {
-            height: 28px; /* оставлен без изменений */
+            height: 28px;
         }
         .timeline-event:hover img.timeline-logo {
             filter: grayscale(0) brightness(1);
-        }
-        /* Поднимаем логотипы в таймлайне вверх, чтобы они не касались линии */
-        .timeline-company {
-            transform: translateY(-8px);
         }
         .period {
             color: #7f8c8d;
@@ -491,67 +485,76 @@
             color:white;
             border-color:var(--secondary);
         }
+        /* ========== ТАЙМЛАЙН ========== */
         .timeline {
-            display:flex;
-            justify-content:space-between;
-            position:relative;
-            margin:25px 0 10px;
-            padding:20px 0;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 25px 0 10px;
+            padding: 20px 0 30px;
         }
         .timeline::before {
-            content:'';
-            position:absolute;
-            top:30%;
-            left:0; right:0;
-            height:3px;
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
             background: var(--secondary);
+            transform: translateY(-50%);
+            z-index: 0;
         }
         .timeline-event {
-            position:relative;
-            text-align:center;
-            width:23%;
-            z-index:1;
-            cursor:pointer;
-            transition:all 0.3s;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
+            position: relative;
+            text-align: center;
+            width: 23%;
+            z-index: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .timeline-event:hover { transform:translateY(-5px); }
+        .timeline-event:hover {
+            transform: translateY(-5px);
+        }
         .timeline-event::before {
-            content:'';
-            position:absolute;
-            top:30%;
-            left:50%;
-            width:16px; height:16px;
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
             background: var(--secondary);
-            border-radius:50%;
-            transform:translate(-50%, -50%);
-            border:3px solid var(--bg);
-            box-shadow:0 0 0 2px var(--secondary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 2px var(--secondary);
+            z-index: 2;
         }
         .timeline-company {
-            font-weight:bold;
-            color:var(--logistics-blue);
-            font-size:1.1rem;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:8px;
-            margin-top:10px;
-            width:100%;
-            transform: translateY(-8px); /* поднимаем логотипы вверх */
+            font-weight: bold;
+            color: var(--logistics-blue);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 0;
+            width: 100%;
+            margin-bottom: 30px; /* поднимаем логотипы выше линии */
         }
         .timeline-position {
-            font-weight:bold;
-            margin-top: 30px; /* опущено ниже линии */
-            width:100%;
-            min-height: 3em; /* выравнивание высоты */
+            font-weight: bold;
+            margin-top: 45px; /* опускаем должности ниже линии */
+            width: 100%;
+            min-height: 3em;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
         }
+        /* ================================= */
         .skills-layout {
             display: flex;
             flex-wrap: wrap;
@@ -842,9 +845,11 @@
             section { padding:15px 15px; }
             .logistics-badge { position:relative; right:auto; top:auto; display:inline-block; margin:10px 0; }
             .timeline { flex-direction:column; align-items:flex-start; }
-            .timeline::before { top:0; bottom:0; left:20px; width:3px; height:100%; }
-            .timeline-event { width:100%; text-align:left; padding-left:50px; margin-bottom:30px; }
-            .timeline-event::before { left:20px; }
+            .timeline::before { top:0; bottom:0; left:20px; width:3px; height:100%; transform:none; }
+            .timeline-event { width:100%; text-align:left; padding-left:50px; margin-bottom:30px; flex-direction:row; flex-wrap:wrap; justify-content:flex-start; }
+            .timeline-event::before { left:20px; top:50%; transform:translate(-50%,-50%); }
+            .timeline-company { order:0; margin-top:0; margin-bottom:0; }
+            .timeline-position { order:1; margin-top:0; margin-left:10px; min-height:auto; }
             .skills-layout { flex-direction:column; }
             .header-controls { position:relative; flex-direction:row; justify-content:center; margin-top:15px; }
             #projectsMap { height:300px; }
@@ -866,8 +871,8 @@
             .timeline-company img.timeline-logo.x5-logo,
             .timeline-company img.timeline-logo.rusagro-logo { height: 32px; }
             .timeline-company img.timeline-logo.ozon-logo { height: 24px; }
-            .timeline-position { min-height: 2.5em; margin-top: 20px; }
-            .timeline-company { transform: translateY(-4px); }
+            .timeline-company { margin-bottom: 15px; }
+            .timeline-position { margin-top: 25px; }
         }
     </style>
 </head>
@@ -1058,7 +1063,7 @@
                 </ul>
             </div>
             <div class="job" data-tags="x5" id="x5-job">
-                <div class="logistics-badge"><i class="fas fa-robot"></i> Розничная логистика</div>
+                <div class="logistics-badge"><i class="fas fa-shopping-cart"></i> Розничная логистика</div> <!-- изменено -->
                 <div class="company">
                     <img src="LogoX5.png" alt="X5 Group" class="company-logo x5-logo"> Июнь 2023 – Октябрь 2024
                 </div>
