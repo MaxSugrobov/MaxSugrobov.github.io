@@ -249,7 +249,7 @@
             top:0; left:0;
         }
         section {
-            padding: 10px 40px 10px 40px; /* уменьшил вертикальные отступы */
+            padding: 10px 40px 10px 40px;
             border-bottom: 1px solid var(--border);
             position: relative;
             opacity: 0;
@@ -273,7 +273,7 @@
             margin: 10px 0 4px;
         }
         .job, .education, .course {
-            margin-bottom: 10px; /* уменьшил */
+            margin-bottom: 10px;
             padding-left: 15px;
             border-left: 3px solid var(--border);
             transition: all 0.3s;
@@ -303,7 +303,7 @@
             filter: grayscale(0.2) brightness(0.95);
         }
         .company .company-logo.ozon-logo {
-            height: 36px; /* уменьшенный для Озона */
+            height: 36px;
         }
         .company:hover .company-logo {
             filter: grayscale(0) brightness(1);
@@ -314,19 +314,19 @@
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
             transition: filter 0.3s;
-            margin-top: -6px; /* немного поднимаем, но основное смещение через padding */
+            /* больше не нужно сдвигать, так как позиционирование через flex */
         }
         .timeline-logo.ozon-logo {
-            height: 36px; /* уменьшенный для Озона */
+            height: 36px;
         }
         .timeline-event:hover .timeline-logo {
             filter: grayscale(0) brightness(1);
         }
         .map-logo {
-            height: 16px;
+            height: 20px;
             width: auto;
             vertical-align: middle;
-            margin-right: 4px;
+            margin-right: 6px;
         }
         .period {
             color: #7f8c8d;
@@ -486,15 +486,16 @@
             justify-content:space-between;
             position:relative;
             margin:20px 0 5px;
-            padding: 40px 0 15px; /* увеличил верхний отступ, чтобы логотипы не касались линии */
+            padding: 10px 0 20px;
         }
         .timeline::before {
             content:'';
             position:absolute;
-            top: 50%; /* опустил линию ниже */
+            top: 50%;
             left:0; right:0;
             height:3px;
             background: var(--secondary);
+            transform: translateY(-50%);
         }
         .timeline-event {
             position:relative;
@@ -502,23 +503,28 @@
             width:23%;
             z-index:1;
             cursor:pointer;
-            transition:all 0.3s;
+            transition: all 0.3s ease;
             display:flex;
             flex-direction:column;
             align-items:center;
+            padding-top: 10px;
         }
-        .timeline-event:hover { transform:translateY(-5px); }
+        .timeline-event:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
         .timeline-event::before {
             content:'';
             position:absolute;
-            top: 50%; /* точка на линии */
+            top: 50%;
             left:50%;
             width:16px; height:16px;
             background: var(--secondary);
             border-radius:50%;
-            transform:translate(-50%, -50%);
+            transform: translate(-50%, -50%);
             border:3px solid var(--bg);
             box-shadow:0 0 0 2px var(--secondary);
+            z-index:2;
         }
         .timeline-company {
             font-weight:bold;
@@ -528,13 +534,15 @@
             align-items:center;
             justify-content:center;
             gap:8px;
-            margin-top:6px;
+            margin-top: 0;
             width:100%;
+            order: -1; /* логотип сверху */
         }
         .timeline-position {
             font-weight:bold;
-            margin-top:12px;
+            margin-top: 8px; /* отступ от линии */
             width:100%;
+            order: 1;
         }
         .skills-layout {
             display: flex;
@@ -826,9 +834,11 @@
             section { padding:10px 15px; }
             .logistics-badge { position:relative; right:auto; top:auto; display:inline-block; margin:8px 0; }
             .timeline { flex-direction:column; align-items:flex-start; }
-            .timeline::before { top:0; bottom:0; left:20px; width:3px; height:100%; }
-            .timeline-event { width:100%; text-align:left; padding-left:50px; margin-bottom:20px; }
-            .timeline-event::before { left:20px; }
+            .timeline::before { top:0; bottom:0; left:20px; width:3px; height:100%; transform:none; }
+            .timeline-event { width:100%; text-align:left; padding-left:50px; margin-bottom:20px; flex-direction:row; flex-wrap:wrap; justify-content:flex-start; }
+            .timeline-event::before { left:20px; top:50%; transform:translate(-50%,-50%); }
+            .timeline-company { order:0; margin-top:0; }
+            .timeline-position { order:1; margin-top:0; margin-left:10px; }
             .skills-layout { flex-direction:column; }
             .header-controls { position:relative; flex-direction:row; justify-content:center; margin-top:10px; }
             #projectsMap { height:300px; }
@@ -844,9 +854,8 @@
             .company .company-logo.ozon-logo { height: 28px; }
             .timeline-logo { height: 32px; }
             .timeline-logo.ozon-logo { height: 28px; }
-            .timeline { padding-top: 30px; }
         }
-        /* Стили для карты – возвращаем стандартные, только немного уменьшаем баллун */
+        /* Стили для карты – компактный баллун с вертикальным списком компаний */
         .ymaps-2-1-79-balloon {
             max-width: 220px !important;
             padding: 6px 10px !important;
@@ -854,7 +863,7 @@
         .ymaps-2-1-79-balloon__content {
             font-size: 13px !important;
             padding: 4px !important;
-            line-height: 1.3 !important;
+            line-height: 1.4 !important;
         }
         .ymaps-2-1-79-balloon__layout {
             padding: 4px !important;
@@ -863,26 +872,33 @@
             font-size: 13px !important;
         }
         .ymaps-2-1-79-balloon__close {
-            display: none !important; /* убираем крестик для компактности */
+            display: none !important;
         }
-        /* Для содержимого баллуна используем flex для логотипов */
         .balloon-content {
             display: flex;
-            flex-wrap: wrap;
-            gap: 4px 8px;
-            align-items: center;
-            justify-content: center;
-            padding: 2px 0;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
         }
-        .balloon-content .map-logo {
-            height: 18px;
+        .balloon-content .balloon-city {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 2px;
+            align-self: flex-start;
+        }
+        .balloon-content .balloon-company {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .balloon-content .balloon-company .map-logo {
+            height: 20px;
             width: auto;
-            vertical-align: middle;
         }
     </style>
 </head>
 <body>
-    <!-- БОКОВЫЕ ИКОНКИ (полный набор, как в оригинале) -->
+    <!-- БОКОВЫЕ ИКОНКИ (полный набор) -->
     <div class="logistics-icon icon-left" style="top:1%;left:3%;font-size:60px;--rot:-12deg;">🚛</div>
     <div class="logistics-icon icon-left dark" style="top:4%;left:12%;font-size:75px;--rot:25deg;">✈️</div>
     <div class="logistics-icon icon-left" style="top:7%;left:6%;font-size:50px;--rot:-8deg;">🚢</div>
@@ -1502,7 +1518,7 @@
             showPhoto(0);
             startPhotoInterval();
 
-            // Карта (с логотипами, компактный баллун)
+            // Карта (с логотипами, вертикальный список компаний)
             if (document.getElementById('projectsMap')) {
                 ymaps.ready(initMap);
 
@@ -1692,16 +1708,16 @@
                     Object.entries(projectsByCity).forEach(([city, companies]) => {
                         const coords = cityCoordinates[city];
                         if (coords) {
-                            let logosHtml = companies.map(comp => {
+                            // Формируем HTML: город отдельно, затем каждая компания на новой строке с логотипом
+                            let companiesHtml = companies.map(comp => {
                                 const logoFile = logoMap[comp] || '';
-                                return logoFile ? `<img src="${logoFile}" class="map-logo" alt="${comp}">` : '';
+                                const logoImg = logoFile ? `<img src="${logoFile}" class="map-logo" alt="${comp}">` : '';
+                                return `<div class="balloon-company">${logoImg} ${comp}</div>`;
                             }).join('');
 
                             const balloonContent = `
-                                <div style="display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; justify-content: center; padding: 2px 0;">
-                                    <strong style="font-size: 13px; width: 100%; text-align: center; margin-bottom: 2px;">${city}</strong>
-                                    ${logosHtml}
-                                </div>
+                                <div class="balloon-city">${city}</div>
+                                ${companiesHtml}
                             `;
                             const firstCompany = companies[0];
                             const placemark = new ymaps.Placemark(
