@@ -295,11 +295,10 @@
             align-items: center;
             gap: 8px;
         }
-        /* ===== НОВЫЕ НАСТРОЙКИ ЛОГОТИПОВ ===== */
+        /* ===== ЛОГОТИПЫ ===== */
         .company img.company-logo {
-            height: 40px;          /* единая высота */
+            height: 40px;
             width: auto;
-            max-height: none;
             vertical-align: middle;
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
@@ -309,9 +308,8 @@
             filter: grayscale(0) brightness(1);
         }
         .timeline-company img.timeline-logo {
-            height: 40px;          /* единая высота для таймлайна */
+            height: 40px;
             width: auto;
-            max-height: none;
             vertical-align: middle;
             object-fit: contain;
             filter: grayscale(0.2) brightness(0.95);
@@ -530,11 +528,11 @@
             gap: 8px;
             margin-top: 0;
             width: 100%;
-            margin-bottom: 12px;
+            margin-bottom: 0px; /* логотип максимально близко к линии */
         }
         .timeline-position {
             font-weight: bold;
-            margin-top: 12px;
+            margin-top: 80px; /* должность сильно опущена */
             width: 100%;
             min-height: 2.5em;
             display: flex;
@@ -855,7 +853,7 @@
             .timeline-company img.timeline-logo {
                 height: 30px;
             }
-            .timeline-position { margin-top: 8px; }
+            .timeline-position { margin-top: 40px; } /* увеличен для мобильных */
         }
     </style>
 </head>
@@ -1162,7 +1160,7 @@
                     <h3><i class="fas fa-chart-line"></i> Экспертиза в видах логистики</h3>
                     <div class="expertise-container">
                         <div class="expertise-category">
-                            <h4 style="margin-top:0;"><i class="fas fa-tools"></i> Практика</h4>
+                            <h4 style="margin-top:0;"><i class="fas fa-tools"></i> Практическая</h4>
                             <div class="skill-bar-container">
                                 <div class="skill-bar-label"><span>Автомобильные перевозки</span><span>85%</span></div>
                                 <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
@@ -1177,7 +1175,7 @@
                             </div>
                         </div>
                         <div class="expertise-category">
-                            <h4 style="margin-top:0;"><i class="fas fa-graduation-cap"></i> Теория</h4>
+                            <h4 style="margin-top:0;"><i class="fas fa-graduation-cap"></i> Академическая</h4>
                             <div class="skill-bar-container">
                                 <div class="skill-bar-label"><span>Морские перевозки</span><span>90%</span></div>
                                 <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
@@ -1438,7 +1436,7 @@
             setInterval(() => {
                 currentIndex = (currentIndex + 1) % testimonials.length;
                 showTestimonial(currentIndex);
-            }, 5000);
+            }, 8000);
 
             // Карусель фото
             const photos = document.querySelectorAll('.photo-item');
