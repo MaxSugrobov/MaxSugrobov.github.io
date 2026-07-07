@@ -528,11 +528,12 @@
             gap: 8px;
             margin-top: 0;
             width: 100%;
-            margin-bottom: 0px; /* логотип максимально близко к линии */
+            margin-bottom: 0px;
+            transform: translateY(18px); /* сдвиг вниз, чтобы логотип был ближе к линии */
         }
         .timeline-position {
             font-weight: bold;
-            margin-top: 80px; /* должность сильно опущена */
+            margin-top: 80px;
             width: 100%;
             min-height: 2.5em;
             display: flex;
@@ -834,7 +835,7 @@
             .timeline::before { top:0; bottom:0; left:20px; width:3px; height:100%; transform:none; }
             .timeline-event { width:100%; text-align:left; padding-left:50px; margin-bottom:30px; flex-direction:row; flex-wrap:wrap; justify-content:flex-start; }
             .timeline-event::before { left:20px; top:50%; transform:translate(-50%,-50%); }
-            .timeline-company { order:0; margin-top:0; margin-bottom:0; }
+            .timeline-company { order:0; margin-top:0; margin-bottom:0; transform: translateY(12px); }
             .timeline-position { order:1; margin-top:0; margin-left:10px; min-height:auto; }
             .skills-layout { flex-direction:column; }
             .header-controls { position:relative; flex-direction:row; justify-content:center; margin-top:15px; }
@@ -853,7 +854,7 @@
             .timeline-company img.timeline-logo {
                 height: 30px;
             }
-            .timeline-position { margin-top: 40px; } /* увеличен для мобильных */
+            .timeline-position { margin-top: 40px; }
         }
     </style>
 </head>
